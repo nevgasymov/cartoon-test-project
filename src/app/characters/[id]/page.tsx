@@ -15,8 +15,13 @@ export default async function CharacterPage({
   if (!character) notFound();
 
   return (
-    <div>
-      <Link href="/">← All characters</Link>
+    <div className="space-y-6">
+      <Link
+        href="/"
+        className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+      >
+        ← All characters
+      </Link>
       <CharacterDetails character={character} />
     </div>
   );

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cn } from "cn";
+import { buttonVariants } from "@/components/ui/button";
 import {
   serializeCharacterSearchParams,
   type CharacterSearchParams,
@@ -17,20 +19,31 @@ export function Pagination({ params, pages }: Props) {
     serializeCharacterSearchParams("/", { ...params, page: target });
 
   return (
-    <nav aria-label="Pagination">
+    <nav
+      aria-label="Pagination"
+      className="grid grid-cols-3 items-center gap-4"
+    >
       <div>
         {page > 1 && (
-          <Link href={hrefFor(page - 1)} rel="prev">
+          <Link
+            href={hrefFor(page - 1)}
+            rel="prev"
+            className={cn(buttonVariants())}
+          >
             Previous
           </Link>
         )}
       </div>
-      <p>
+      <p className="text-center text-sm text-[#ffffffb0]">
         Page {page} of {pages}
       </p>
-      <div>
+      <div className="text-right">
         {page < pages && (
-          <Link href={hrefFor(page + 1)} rel="next">
+          <Link
+            href={hrefFor(page + 1)}
+            rel="next"
+            className={cn(buttonVariants())}
+          >
             Next
           </Link>
         )}

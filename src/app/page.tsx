@@ -6,7 +6,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   const params = await loadCharacterSearchParams(searchParams);
 
   return (
-    <div>
+    <div className="space-y-6">
       <CharacterFilters />
       <CharacterResults params={params} />
     </div>
