@@ -6,7 +6,6 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Characters</h1>
       <CharacterGrid characters={characters} />
     </div>
   );
