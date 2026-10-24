@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Link from "next/link";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,13 +34,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </h1>
           </div>
         </header>
-        <main
-          id="main"
-          tabIndex={-1}
-          className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 outline-none"
-        >
-          {children}
-        </main>
+        <NuqsAdapter>
+          <main
+            id="main"
+            tabIndex={-1}
+            className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 outline-none"
+          >
+            {children}
+          </main>
+        </NuqsAdapter>
       </body>
     </html>
   );

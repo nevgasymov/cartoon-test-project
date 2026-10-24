@@ -84,26 +84,6 @@
   body {
     @apply bg-background text-foreground;
   }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background:
-      repeating-radial-gradient(
-        circle at 50% 45%,
-        rgb(230 250 120 / 0.14) 0 14px,
-        transparent 14px 38px
-      ),
-      radial-gradient(
-        circle at 50% 45%,
-        #d4f06a 0%,
-        #9bd84e 18%,
-        #5bbf45 38%,
-        #2e9a3a 62%,
-        #17652c 100%
-      );
-  }
   html {
     @apply font-sans;
   }
