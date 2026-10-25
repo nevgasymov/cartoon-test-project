@@ -1,6 +1,7 @@
 "use client";
 
 import { useQueryStates } from "nuqs";
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { characterSearchParams, GENDERS, STATUSES } from "../search-params";
@@ -20,10 +21,7 @@ export function CharacterFilters() {
 
   return (
     <search className="grid items-end gap-4 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto]">
-      <div className="grid">
-        <label htmlFor="name" className="text-sm font-medium">
-          Name
-        </label>
+      <Field id="name" label="Name">
         <Input
           className={inputClass}
           id="name"
@@ -32,11 +30,8 @@ export function CharacterFilters() {
           value={params.name}
           onChange={(e) => setParams({ name: e.target.value, page: null })}
         />
-      </div>
-      <div className="grid">
-        <label htmlFor="species" className="text-sm font-medium">
-          Species
-        </label>
+      </Field>
+      <Field id="species" label="Species">
         <Input
           className={inputClass}
           id="species"
@@ -45,11 +40,8 @@ export function CharacterFilters() {
           value={params.species}
           onChange={(e) => setParams({ species: e.target.value, page: null })}
         />
-      </div>
-      <div className="grid">
-        <label htmlFor="status" className="text-sm font-medium">
-          Status
-        </label>
+      </Field>
+      <Field id="status" label="Status">
         <select
           id="status"
           className={selectClass}
@@ -68,11 +60,8 @@ export function CharacterFilters() {
             </option>
           ))}
         </select>
-      </div>
-      <div className="grid">
-        <label htmlFor="gender" className="text-sm font-medium">
-          Gender
-        </label>
+      </Field>
+      <Field id="gender" label="Gender">
         <select
           id="gender"
           className={selectClass}
@@ -91,10 +80,29 @@ export function CharacterFilters() {
             </option>
           ))}
         </select>
-      </div>
+      </Field>
       <Button disabled={!hasFilters} onClick={() => setParams(null)}>
         Clear filters
       </Button>
     </search>
+  );
+}
+
+function Field({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="grid">
+      <label htmlFor={id} className="text-sm font-medium">
+        {label}
+      </label>
+      {children}
+    </div>
   );
 }

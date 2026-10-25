@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ResultOf } from "@graphql-typed-document-node/core";
+import type { ReactNode } from "react";
 import { graphql } from "@/gql";
 import { StatusBadge } from "./status-badge";
 
@@ -30,17 +31,10 @@ export const CharacterDetailsFragment = graphql(`
 `);
 
 type Character = ResultOf<typeof CharacterDetailsFragment>;
+type Place = Character["origin"];
 
 export function CharacterDetails({ character }: { character: Character }) {
   const episodes = character.episode.filter((e) => e !== null);
-  const origin =
-    character.origin?.name && character.origin.name !== "unknown"
-      ? character.origin
-      : null;
-  const location =
-    character.location?.name && character.location.name !== "unknown"
-      ? character.location
-      : null;
 
   return (
     <article className="space-y-10">
@@ -60,46 +54,18 @@ export function CharacterDetails({ character }: { character: Character }) {
             {character.name}
           </h1>
           <dl className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 text-sm">
-            <dt className="text-muted-foreground">Status</dt>
-            <dd className="font-medium">
+            <Row label="Status">
               <StatusBadge status={character.status} />
-            </dd>
-            <dt className="text-muted-foreground">Species</dt>
-            <dd className="font-medium">{character.species}</dd>
-            <dt className="text-muted-foreground">Type</dt>
-            <dd className="font-medium">{character.type || "None"}</dd>
-            <dt className="text-muted-foreground">Gender</dt>
-            <dd className="font-medium">{character.gender}</dd>
-            <dt className="text-muted-foreground">Origin</dt>
-            <dd className="font-medium">
-              {origin ? (
-                <>
-                  {origin.name}
-                  {origin.dimension && origin.dimension !== "unknown" && (
-                    <span className="block font-normal text-muted-foreground">
-                      {origin.dimension}
-                    </span>
-                  )}
-                </>
-              ) : (
-                "Unknown"
-              )}
-            </dd>
-            <dt className="text-muted-foreground">Last known location</dt>
-            <dd className="font-medium">
-              {location ? (
-                <>
-                  {location.name}
-                  {location.dimension && location.dimension !== "unknown" && (
-                    <span className="block font-normal text-muted-foreground">
-                      {location.dimension}
-                    </span>
-                  )}
-                </>
-              ) : (
-                "Unknown"
-              )}
-            </dd>
+            </Row>
+            <Row label="Species">{character.species}</Row>
+            <Row label="Type">{character.type || "None"}</Row>
+            <Row label="Gender">{character.gender}</Row>
+            <Row label="Origin">
+              <PlaceName place={character.origin} />
+            </Row>
+            <Row label="Last known location">
+              <PlaceName place={character.location} />
+            </Row>
           </dl>
         </div>
       </div>
@@ -120,5 +86,28 @@ export function CharacterDetails({ character }: { character: Character }) {
         </ul>
       </section>
     </article>
+  );
+}
+
+function Row({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <>
+      <dt className="text-muted-foreground">{label}</dt>
+      <dd className="font-medium">{children}</dd>
+    </>
+  );
+}
+
+function PlaceName({ place }: { place: Place }) {
+  if (!place?.name || place.name === "unknown") return "Unknown";
+  return (
+    <>
+      {place.name}
+      {place.dimension && place.dimension !== "unknown" && (
+        <span className="block font-normal text-muted-foreground">
+          {place.dimension}
+        </span>
+      )}
+    </>
   );
 }
