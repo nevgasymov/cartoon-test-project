@@ -1,10 +1,13 @@
 "use client";
 
-import { useQueryStates } from "nuqs";
+import { debounce, useQueryStates } from "nuqs";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { characterSearchParams, GENDERS, STATUSES } from "../search-params";
+
+const typingUpdate = { limitUrlUpdates: debounce(300) };
+const pickUpdate = { history: "push" } as const;
 
 const controlClass =
   "border border-[#1a384066] bg-[#41b4ca] text-white outline-none focus-visible:border-[#1a384066] focus-visible:shadow-[0_0_7px_5px_#bfde42] focus-visible:ring-0 dark:bg-[#41b4ca]";
@@ -28,7 +31,9 @@ export function CharacterFilters() {
           type="search"
           placeholder="Rick, Morty..."
           value={params.name}
-          onChange={(e) => setParams({ name: e.target.value, page: null })}
+          onChange={(e) =>
+            setParams({ name: e.target.value, page: null }, typingUpdate)
+          }
         />
       </Field>
       <Field id="species" label="Species">
@@ -38,7 +43,9 @@ export function CharacterFilters() {
           type="search"
           placeholder="Human, Alien..."
           value={params.species}
-          onChange={(e) => setParams({ species: e.target.value, page: null })}
+          onChange={(e) =>
+            setParams({ species: e.target.value, page: null }, typingUpdate)
+          }
         />
       </Field>
       <Field id="status" label="Status">
@@ -47,10 +54,13 @@ export function CharacterFilters() {
           className={selectClass}
           value={params.status ?? ""}
           onChange={(e) =>
-            setParams({
-              status: characterSearchParams.status.parse(e.target.value),
-              page: null,
-            })
+            setParams(
+              {
+                status: characterSearchParams.status.parse(e.target.value),
+                page: null,
+              },
+              pickUpdate,
+            )
           }
         >
           <option value="">Any</option>
@@ -67,10 +77,13 @@ export function CharacterFilters() {
           className={selectClass}
           value={params.gender ?? ""}
           onChange={(e) =>
-            setParams({
-              gender: characterSearchParams.gender.parse(e.target.value),
-              page: null,
-            })
+            setParams(
+              {
+                gender: characterSearchParams.gender.parse(e.target.value),
+                page: null,
+              },
+              pickUpdate,
+            )
           }
         >
           <option value="">Any</option>
@@ -81,7 +94,10 @@ export function CharacterFilters() {
           ))}
         </select>
       </Field>
-      <Button disabled={!hasFilters} onClick={() => setParams(null)}>
+      <Button
+        disabled={!hasFilters}
+        onClick={() => setParams(null, pickUpdate)}
+      >
         Clear filters
       </Button>
     </search>
