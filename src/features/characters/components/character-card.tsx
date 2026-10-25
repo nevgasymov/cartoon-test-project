@@ -47,7 +47,7 @@ export function CharacterCard({ character, aboveFold = false }: Props) {
             {character.name}
           </Link>
         </h2>
-        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+        <p className="flex items-center gap-2 text-sm text-[#1a3840]/90">
           <StatusBadge
             status={character.status}
             labelClassName="sr-only md:not-sr-only"
