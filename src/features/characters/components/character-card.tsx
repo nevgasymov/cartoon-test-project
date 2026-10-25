@@ -55,7 +55,12 @@ export function CharacterCard({ character, aboveFold = false }: Props) {
           <span aria-hidden="true" className="hidden md:inline">
             ·
           </span>
-          <span>{character.species}</span>
+          <span
+            className="min-w-0 truncate"
+            title={character.species ?? undefined}
+          >
+            {character.species}
+          </span>
         </p>
       </div>
     </article>

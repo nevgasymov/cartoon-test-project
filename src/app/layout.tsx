@@ -27,10 +27,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur">
-          <div className="mx-auto w-full max-w-6xl px-4 py-3 text-center">
-            <h1 className="text-xl font-semibold">
-              <Link href="/">Rick &amp; Morty Explorer</Link>
+        <header>
+          <div className="mx-auto w-full max-w-6xl px-4 py-3">
+            <h1 className="mx-auto h-[86px] w-[280px] overflow-hidden bg-[url(/rick-morty-logo.svg)] bg-contain bg-center bg-no-repeat indent-[-9999px]">
+              <Link href="/" className="block h-full">
+                Rick &amp; Morty Explorer
+              </Link>
             </h1>
           </div>
         </header>

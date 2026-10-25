@@ -12,7 +12,7 @@ const pickUpdate = { history: "push" } as const;
 const controlClass =
   "border border-[#1a384066] bg-[#41b4ca] text-white outline-none focus-visible:border-[#1a384066] focus-visible:shadow-[0_0_7px_5px_#bfde42] focus-visible:ring-0 dark:bg-[#41b4ca]";
 const selectClass = `h-8 w-full appearance-none rounded-lg bg-[url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2024%2024%27%20fill=%27none%27%20stroke=%27white%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27m6%209%206%206%206-6%27/%3E%3C/svg%3E)] bg-size-[14px] bg-[position:right_7px_center] bg-no-repeat pr-9 pl-2.5 text-sm capitalize [&_option]:text-black ${controlClass}`;
-const inputClass = `${controlClass} appearance-none placeholder:text-white/70 [&:-webkit-autofill]:shadow-[inset_0_0_0_1000px_#41b4ca] [&:-webkit-autofill]:[-webkit-text-fill-color:white]`;
+const inputClass = `${controlClass} appearance-none placeholder:text-white/70 [&:-webkit-autofill]:shadow-[inset_0_0_0_1000px_#41b4ca] [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill:focus-visible]:shadow-[inset_0_0_0_1000px_#41b4ca,0_0_7px_5px_#bfde42]`;
 
 export function CharacterFilters() {
   const [params, setParams] = useQueryStates(characterSearchParams, {
@@ -29,6 +29,7 @@ export function CharacterFilters() {
           className={inputClass}
           id="name"
           type="search"
+          autoComplete="off"
           placeholder="Rick, Morty..."
           value={params.name}
           onChange={(e) =>
@@ -41,6 +42,7 @@ export function CharacterFilters() {
           className={inputClass}
           id="species"
           type="search"
+          autoComplete="off"
           placeholder="Human, Alien..."
           value={params.species}
           onChange={(e) =>

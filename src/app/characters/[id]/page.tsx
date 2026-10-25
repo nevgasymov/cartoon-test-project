@@ -40,7 +40,7 @@ export default async function CharacterPage({
     <div className="space-y-6">
       <Link
         href="/"
-        className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+        className="text-sm text-white underline-offset-4 hover:underline"
       >
         ← All characters
       </Link>

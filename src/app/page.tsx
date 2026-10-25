@@ -14,7 +14,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   return (
     <div className="space-y-6">
       <CharacterFilters />
-      <p role="status" className="text-sm text-muted-foreground">
+      <p role="status" className="text-sm text-[#ffffffb0]">
         <Suspense fallback="Loading characters...">
           <ResultCount params={params} />
         </Suspense>
