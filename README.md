@@ -3,6 +3,8 @@
 Character list for the [Rick and Morty GraphQL API](https://rickandmortyapi.com/graphql) with search,
 filters, pagination and a character page.
 
+**Live demo:** https://rick-morty-demo-app.vercel.app
+
 ## Run
 
 Node 24.
