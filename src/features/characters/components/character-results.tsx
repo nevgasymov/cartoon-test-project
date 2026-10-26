@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cn } from "cn";
+import { buttonVariants } from "@/components/ui/button";
 import { getCharacters } from "../api/get-characters";
 import { toQueryVariables, type CharacterSearchParams } from "../search-params";
 import { CharacterGrid } from "./character-grid";
@@ -13,12 +15,12 @@ export async function CharacterResults({
 
   if (characters.length === 0) {
     return (
-      <div className="space-y-3 py-12 text-center">
+      <div className="mx-auto my-8 max-w-md space-y-4 rounded-[7px] bg-white p-8 text-center shadow-[0_0_16px_6px_#bfde42]">
         <p className="text-lg font-medium">No characters match your search</p>
         <p className="text-muted-foreground">
           Try a different name or fewer filters.
         </p>
-        <Link href="/" className="inline-block underline underline-offset-4">
+        <Link href="/" className={cn(buttonVariants())}>
           Show all characters
         </Link>
       </div>

@@ -21,7 +21,7 @@ type Props = {
 
 export function CharacterCard({ character, aboveFold = false }: Props) {
   return (
-    <article className="group relative overflow-hidden rounded-[7px] bg-[#dff1dbb0] transition-[background-color,box-shadow] duration-300 hover:bg-white hover:shadow-[0_0_16px_6px_#bfde42] dark:bg-card dark:hover:bg-muted has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50">
+    <article className="group relative overflow-hidden rounded-[7px] bg-[#dff1dbb0] transition-[background-color,box-shadow] duration-300 hover:bg-white hover:shadow-[0_0_16px_6px_#bfde42] has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50">
       {character.image && (
         <Image
           src={character.image}
